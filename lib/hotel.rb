@@ -5,17 +5,21 @@ require_relative 'room'
 module Booking
   class Hotel
     
+    attr_reader :reservations
+    attr_accessor :rooms
+    
     def initialize(num_of_rooms)
-      # @start_date = start_date
-      # @end_date = end_date
-      @rooms = make_rooms(num_of_rooms)
-      reservations = []
+      if num_of_rooms == nil || num_of_rooms <= 0 
+        raise ArgumentError, "Hotel must have a postive number of rooms greater than 0."
+      end
       
+      @rooms = make_rooms(num_of_rooms)
+      @reservations = [] 
     end
     
     def make_rooms(num)
       array = Array.new(num)
-      i = 1
+      i = 0
       array.map! do |room|
         room = i
         room.to_s.to_sym
@@ -25,6 +29,8 @@ module Booking
     end
     
     def make_reservation
+      new_reservation = Booking::Reservation.new()
+      #@reservations.push(new_reservation)
     end
     
   end
