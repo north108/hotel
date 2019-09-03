@@ -7,7 +7,7 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 # require_relative your lib files here!
 
-require_relative 'date_range'
-require_relative 'hotel'
-require_relative 'reservation'
-require_relative 'room'
+require_relative '../lib/date_range'
+require_relative '../lib/hotel'
+require_relative '../lib/reservation'
+require_relative '../lib/room'
