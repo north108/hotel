@@ -5,7 +5,7 @@ require_relative 'room'
 module Booking
   class Hotel
     
-    def initialize (num_of_rooms)
+    def initialize(num_of_rooms)
       # @start_date = start_date
       # @end_date = end_date
       @rooms = make_rooms(num_of_rooms)
@@ -13,10 +13,13 @@ module Booking
       
     end
     
-    def make_rooms
-      array = [1..num_of_rooms]
+    def make_rooms(num)
+      array = Array.new(num)
+      i = 1
       array.map! do |room|
-        room.to_sym
+        room = i
+        room.to_s.to_sym
+        i += 1
       end
       return array
     end
