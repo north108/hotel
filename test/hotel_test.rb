@@ -37,18 +37,37 @@ describe "Hotel Class" do
     
   end
   
-  describe "Make_Reservation" do 
-    it "returns an instance of Reservation" do
+  describe "Make_Rooms" do
+    it "creates an instance of room" do
       the_grand_budapest_hotel = build_test_hotel
-      expect(the_grand_budapest_hotel.make_reservation).must_be_kind_of Booking::Reservation
-    end 
-    # it "Adds reservation to all of Hotel's reservations list" do
+      array = the_grand_budapest_hotel.make_rooms(20)
+      array.each do |room|
+        expect(room).must_be_kind_of Booking::Room
+      end
+    end
+  end
+  
+  
+  describe "Make_Reservation" do 
+    # it "creates an instance of Reservation" do
     #   the_grand_budapest_hotel = build_test_hotel
-    #   new_reservation = the_grand_budapest_hotel.make_reservation
-    #   expect(the_grand_budapest_hotel.reservations.length).must_equal 1
-    # end
+    #   start_date = Date.new(2019, 2, 15)
+    #   end_date = Date.new(2019, 2, 20)
+    #   expect(new_reservation).must_be_kind_of Booking::Reservation
+    # end 
     
+    
+    
+    it "Adds reservation to all of Hotel's reservations list" do
+      the_grand_budapest_hotel = build_test_hotel
+      start_date = Date.new(2019, 2, 15)
+      end_date = Date.new(2019, 2, 20)
+      the_grand_budapest_hotel.make_reservation
+      #new_reservation = the_grand_budapest_hotel.make_reservation
+      expect(the_grand_budapest_hotel.reservations.length).must_equal 1
+    end
     
   end
+  
 end
 

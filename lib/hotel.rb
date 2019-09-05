@@ -2,10 +2,12 @@ require_relative 'date_range'
 require_relative 'reservation'
 require_relative 'room'
 
+require 'pry'
+
 module Booking
   class Hotel
     
-    attr_reader :reservations
+    attr_reader :reservations, :start_date, :end_date #, :new_reservation
     attr_accessor :rooms
     
     def initialize(num_of_rooms)
@@ -15,22 +17,36 @@ module Booking
       
       @rooms = make_rooms(num_of_rooms)
       @reservations = [] 
+      #@new_reservation = new_reservation
+      # @start_date = start_date
+      # @end_date = end_date
     end
     
     def make_rooms(num)
-      array = Array.new(num)
-      i = 0
-      array.map! do |room|
-        room = i
-        room.to_s.to_sym
-        i += 1
+      room_array = []
+      i = 1
+      if i < num + 1
+        num.times do |room|
+          room = Booking::Room.new(i)
+          room_array << room
+          i += 1
+        end
       end
-      return array
+      #binding.pry
+      return room_array
     end
     
     def make_reservation
-      new_reservation = Booking::Reservation.new()
-      #@reservations.push(new_reservation)
+      room = rooms.sample
+      new_reservation = Booking::Reservation.new(start_date, end_date, room)
+      
+      add_reservation(new_reservation)
+    end
+    
+    
+    def add_reservation(new_reservation)
+      reservations.push(new_reservation) 
+      p reservations
     end
     
   end
