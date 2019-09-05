@@ -7,7 +7,7 @@ require 'pry'
 module Booking
   class Hotel
     
-    attr_reader :reservations, :start_date, :end_date #, :new_reservation
+    attr_reader :reservations #, :start_date, :end_date , :new_reservation
     attr_accessor :rooms
     
     def initialize(num_of_rooms)
@@ -36,18 +36,25 @@ module Booking
       return room_array
     end
     
-    def make_reservation
-      room = rooms.sample
-      new_reservation = Booking::Reservation.new(start_date, end_date, room)
+    def make_reservation(start_date, end_date)
       
-      add_reservation(new_reservation)
+      if start_date > end_date
+        raise ArgumentError, "End date of reservation must be after start date."
+      else
+        new_date_range = Booking::DateRange.new(start_date, end_date)
+        
+        room = rooms.sample
+        
+        new_reservation = Booking::Reservation.new(start_date, end_date, room)
+      end
+      
+      reservations.push(new_reservation)
     end
     
     
-    def add_reservation(new_reservation)
-      reservations.push(new_reservation) 
-      p reservations
-    end
+    # def add_reservation(new_reservation)
+    #   reservations.push(new_reservation) 
+    # end
     
   end
 end

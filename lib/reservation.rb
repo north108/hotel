@@ -3,7 +3,7 @@ require 'pry'
 
 module Booking
   class Reservation
-    attr_reader :start_date, :end_date, :room_number
+    attr_reader :start_date, :end_date, :room
     
     def initialize(start_date, end_date, room)
       @start_date = start_date

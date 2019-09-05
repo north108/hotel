@@ -49,25 +49,37 @@ describe "Hotel Class" do
   
   
   describe "Make_Reservation" do 
-    # it "creates an instance of Reservation" do
-    #   the_grand_budapest_hotel = build_test_hotel
-    #   start_date = Date.new(2019, 2, 15)
-    #   end_date = Date.new(2019, 2, 20)
-    #   expect(new_reservation).must_be_kind_of Booking::Reservation
-    # end 
     
     
     
-    it "Adds reservation to all of Hotel's reservations list" do
-      the_grand_budapest_hotel = build_test_hotel
+    before do
+      @the_grand_budapest_hotel = build_test_hotel
       start_date = Date.new(2019, 2, 15)
       end_date = Date.new(2019, 2, 20)
-      the_grand_budapest_hotel.make_reservation
-      #new_reservation = the_grand_budapest_hotel.make_reservation
-      expect(the_grand_budapest_hotel.reservations.length).must_equal 1
+      @new_reservation = @the_grand_budapest_hotel.make_reservation(start_date, end_date)
     end
     
+    # it "creates an instance of a room" do 
+    #   expect(@new_reservation.new_reservation).must_be_kind_of Booking::Reservation
+    # end
+    
+    
+    
+    it "Adds new reservation to all of Hotel's reservations list" do
+      expect(@the_grand_budapest_hotel.reservations.length).must_equal 1
+    end
+    
+    it "raises an argument if end_date is before start_date" do
+      the_grand_budapest_hotel = build_test_hotel
+      start_date = Date.new(2019, 2, 20)
+      end_date = Date.new(2019, 2, 15)
+      new_reservation = the_grand_budapest_hotel.make_reservation(start_date, end_date)
+      
+      expect{new_reservation}.must_raise ArgumentError
+    end
   end
   
 end
+
+
 
