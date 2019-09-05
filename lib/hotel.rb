@@ -42,13 +42,14 @@ module Booking
         raise ArgumentError, "End date of reservation must be after start date."
       else
         new_date_range = Booking::DateRange.new(start_date, end_date)
+        new_total_nights = new_date_range.total_nights
         
         room = rooms.sample
         
-        new_reservation = Booking::Reservation.new(start_date, end_date, room)
+        new_reservation = Booking::Reservation.new(new_date_range, room)
       end
       
-      reservations.push(new_reservation)
+      # reservations.push(new_reservation)
     end
     
     

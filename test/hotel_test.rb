@@ -63,7 +63,10 @@ describe "Hotel Class" do
     #   expect(@new_reservation.new_reservation).must_be_kind_of Booking::Reservation
     # end
     
-    
+    it "calculates total nights of reservation" do 
+      #binding.pry
+      expect(@new_reservation.total_nights).must_equal 5
+    end
     
     it "Adds new reservation to all of Hotel's reservations list" do
       expect(@the_grand_budapest_hotel.reservations.length).must_equal 1

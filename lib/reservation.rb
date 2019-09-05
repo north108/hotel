@@ -1,13 +1,14 @@
 require_relative 'hotel'
 require 'pry'
 
+
+
 module Booking
   class Reservation
-    attr_reader :start_date, :end_date, :room
+    attr_reader :date_range, :room
     
-    def initialize(start_date, end_date, room)
-      @start_date = start_date
-      @end_date = end_date
+    def initialize(date_range, room)
+      @date_range = date_range
       @room = room
     end
     
@@ -16,11 +17,11 @@ module Booking
     #   return Booking::Hotel.rooms.sample
     # end
     
-    def validate_date
-    end
+    # def validate_date
+    # end
     
-    def self.find(date)
-    end
+    # def self.find(date)
+    # end
     
   end
 end
