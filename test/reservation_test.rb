@@ -24,7 +24,15 @@ def build_test_reservation
   end_date = Date.new(2019, 2, 20)
   res_date_range = Booking::DateRange.new(start_date, end_date)
   res_room = Booking::Room.new(5)
-  reservation = Booking::Reservation.new(res_date_range, res_room)
+  res_total_nights = res_date_range.total_nights
+  res_total_cost = res_total_nights * 200
+  reservation = Booking::Reservation.new(res_date_range, res_total_nights, res_total_cost, res_room)
+  
+  # the_grand_budapest_hotel = Booking::Hotel.new(20)
+  # start_date = Date.new(2019, 2, 15)
+  # end_date = Date.new(2019, 2, 20)
+  # reservation = the_grand_budapest_hotel.make_reservation(start_date, end_date)
+  
 end
 
 describe "Reservation Class" do

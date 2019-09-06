@@ -43,13 +43,24 @@ module Booking
       else
         new_date_range = Booking::DateRange.new(start_date, end_date)
         new_total_nights = new_date_range.total_nights
+        new_cost = new_total_nights * 200
         
         room = rooms.sample
         
-        new_reservation = Booking::Reservation.new(new_date_range, room)
+        new_reservation = Booking::Reservation.new(new_date_range, new_total_nights, new_cost, room)
       end
       
-      # reservations.push(new_reservation)
+      reservations.push(new_reservation)
+    end
+    
+    def find_reservation(start_date, end_date)
+      reservation_array = []
+      reservations.each do |reservation|
+        if reservation.date_range.start_date == start_date && reservation.date_range.end_date == end_date
+          reservation_array << reservation
+        end
+      end
+      return reservation_array
     end
     
     

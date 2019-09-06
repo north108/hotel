@@ -5,11 +5,13 @@ require 'pry'
 
 module Booking
   class Reservation
-    attr_reader :date_range, :room
+    attr_reader :date_range, :total_cost, :total_nights, :room
     
-    def initialize(date_range, room)
+    def initialize(date_range, total_nights, total_cost, room)
       @date_range = date_range
       @room = room
+      @total_nights = total_nights
+      @total_cost = total_cost
     end
     
     # def assign_room
