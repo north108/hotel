@@ -43,5 +43,6 @@ describe "DateRange" do
       expect{@test_date_range.total_nights}.must_raise ArgumentError
       
     end
+    
   end
 end
