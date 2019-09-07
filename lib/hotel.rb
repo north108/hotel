@@ -64,9 +64,31 @@ module Booking
     end
     
     
-    # def add_reservation(new_reservation)
-    #   reservations.push(new_reservation) 
-    # end
+    def available_rooms(start_date, end_date)
+      proposed_date_range = Booking::DateRange.new(start_date, end_date)
+      unavailable_rooms = []
+      reservations.each do |reservation|
+        p reservations
+        if reservation.date_range.end_date > proposed_date_range.start_date && reservation.date_range.start_date < proposed_date_range.end_date
+          unavailable_rooms << reservation.room.number
+        end
+        p "##############"
+        p unavailable_rooms 
+      end
+      
+      available_rooms = []
+      i = 0
+      @rooms.each do |room|
+        if room.number == unavailable_rooms[i]
+          i += 1
+        else
+          available_rooms << room
+        end
+      end
+      p "##############"
+      p available_rooms
+      return available_rooms
+    end
     
   end
 end

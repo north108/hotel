@@ -2,7 +2,7 @@ require_relative 'test_helper'
 
 def build_test_hotel
   return Booking::Hotel.new(
-  20
+    20
   )
 end
 
@@ -88,40 +88,99 @@ describe "Hotel Class" do
       # new_reservation = the_grand_budapest_hotel.make_reservation(start_date, end_date)
       
       expect{
-      the_grand_budapest_hotel.make_reservation(start_date, end_date)
-    }.must_raise ArgumentError
+        the_grand_budapest_hotel.make_reservation(start_date, end_date)
+      }.must_raise ArgumentError
+    end
   end
-end
-
-describe "Find_Reservation" do
-  before do
-    @the_grand_budapest_hotel = build_test_hotel
-    
-    @res_1_start_date = Date.new(2019, 2, 15)
-    @res_1_end_date = Date.new(2019, 2, 20)
-    @res_1 = @the_grand_budapest_hotel.make_reservation(@res_1_start_date, @res_1_end_date)
-    
-    @res_2_start_date = Date.new(2019, 2, 15)
-    @res_2_end_date = Date.new(2019, 2, 20)
-    @res_2 = @the_grand_budapest_hotel.make_reservation(@res_2_start_date, @res_2_end_date)
-    
-    @res_3_start_date = Date.new(2019, 6, 10)
-    @res_3_end_date = Date.new(2019, 6, 23)
-    @res_3 = @the_grand_budapest_hotel.make_reservation(@res_3_start_date, @res_3_end_date)
-    
-  end 
   
-  it "returns an array of reservation objects" do 
-    p @the_grand_budapest_hotel.find_reservation(@res_1_start_date, @res_1_end_date)
-    expect(@the_grand_budapest_hotel.find_reservation(@res_1_start_date, @res_1_end_date)).must_be_kind_of Array
-  end 
-  
-  it "returns an array of the correct length" do 
-    array = @the_grand_budapest_hotel.find_reservation(@res_1_start_date, @res_1_end_date) 
-    expect(array.length).must_equal 2
+  describe "Find_Reservation" do
+    before do
+      @the_grand_budapest_hotel = build_test_hotel
+      
+      @res_1_start_date = Date.new(2019, 2, 15)
+      @res_1_end_date = Date.new(2019, 2, 20)
+      @res_1 = @the_grand_budapest_hotel.make_reservation(@res_1_start_date, @res_1_end_date)
+      
+      @res_2_start_date = Date.new(2019, 2, 15)
+      @res_2_end_date = Date.new(2019, 2, 20)
+      @res_2 = @the_grand_budapest_hotel.make_reservation(@res_2_start_date, @res_2_end_date)
+      
+      @res_3_start_date = Date.new(2019, 6, 10)
+      @res_3_end_date = Date.new(2019, 6, 23)
+      @res_3 = @the_grand_budapest_hotel.make_reservation(@res_3_start_date, @res_3_end_date)
+      
+    end 
+    
+    it "returns an array of reservation objects" do 
+      expect(@the_grand_budapest_hotel.find_reservation(@res_1_start_date, @res_1_end_date)).must_be_kind_of Array
+    end 
+    
+    it "returns an array of the correct length" do 
+      array = @the_grand_budapest_hotel.find_reservation(@res_1_start_date, @res_1_end_date) 
+      expect(array.length).must_equal 2
+    end
   end
-end
-
+  
+  describe "Available_Rooms" do 
+    
+    it "will return an array of rooms that are available given the date range" do 
+      @the_grand_budapest_hotel = build_test_hotel
+      start_date = Date.new(2019, 10, 10)
+      end_date = Date.new(2019, 10, 24)
+      
+      expect(@the_grand_budapest_hotel.available_rooms(start_date, end_date)).must_be_kind_of Array
+    end
+    
+    it "puts the unavailable room into the unavaiable_room array" do 
+      @the_grand_budapest_hotel = build_test_hotel
+      
+      res_1_start_date = Date.new(2019, 2, 15)
+      res_1_end_date = Date.new(2019, 2, 20)
+      
+      res_1 = @the_grand_budapest_hotel.make_reservation(res_1_start_date, res_1_end_date)
+      #p res_1
+      res_2_start_date = Date.new(2019, 2, 15)
+      res_2_end_date = Date.new(2019, 2, 20)
+      
+      res_2 = @the_grand_budapest_hotel.make_reservation(res_2_start_date, res_2_end_date)
+      
+      res_3_start_date = Date.new(2019, 6, 10)
+      res_3_end_date = Date.new(2019, 6, 23)
+      res_3 = @the_grand_budapest_hotel.make_reservation(res_3_start_date, res_3_end_date)
+      
+      res_4_start_date = Date.new(2019, 2, 15)
+      res_4_end_date = Date.new(2019, 2, 20)
+      res_4 = @the_grand_budapest_hotel.available_rooms(res_4_start_date, res_4_end_date)
+      
+      # expect(available_rooms.length).must_equal 2
+      
+    end 
+    
+    # it "list room as unavailable if proposed_date_range is completely wihtin reservation date_range" do
+    #   @the_grand_budapest_hotel = build_test_hotel
+    
+    #   res_1_start_date = Date.new(2019, 2, 15)
+    #   res_1_end_date = Date.new(2019, 2, 20)
+    
+    #   res_1 = @the_grand_budapest_hotel.make_reservation(res_1_start_date, res_1_end_date)
+    #   #p res_1
+    #   res_2_start_date = Date.new(2019, 2, 15)
+    #   res_2_end_date = Date.new(2019, 2, 20)
+    
+    #   res_2 = @the_grand_budapest_hotel.make_reservation(res_2_start_date, res_2_end_date)
+    
+    #   res_3_start_date = Date.new(2019, 6, 10)
+    #   res_3_end_date = Date.new(2019, 6, 23)
+    #   res_3 = @the_grand_budapest_hotel.make_reservation(res_3_start_date, res_3_end_date)
+    
+    #   edge_case_start_date = Date.new(2019, 2, 16)
+    #   edge_case_end_date = Date.new(2019, 2, 19)
+    #   edge_case = @the_grand_budapest_hotel.available_rooms(edge_case_start_date, edge_case_end_date)
+    #   # expect(available_rooms.length).must_equal 2
+    # end
+    
+  end
+  
 end
 
 
