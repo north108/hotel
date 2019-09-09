@@ -7,7 +7,7 @@ require 'pry'
 module Booking
   class Hotel
     
-    attr_reader :reservations, :unavailable_rooms #:a_rooms , :start_date, :end_date , :new_reservation
+    attr_reader :reservations, :unavailable_rooms 
     attr_accessor :rooms
     
     def initialize(num_of_rooms)
@@ -18,44 +18,28 @@ module Booking
       @rooms = make_rooms(num_of_rooms)
       @reservations = [] 
       @unavailable_rooms = []
-      # @a_rooms = []
-      #@new_reservation = new_reservation
-      # @start_date = start_date
-      # @end_date = end_date
     end
     
     def make_rooms(num)
       room_array = []
       i = 1
-      while i < num + 1
-        # num.times do |room|
+      while i < num + 1 
         room = Booking::Room.new(i)
         room_array << room
         i += 1
-        # end
       end
-      #binding.pry
-      
       return room_array
     end
     
     def make_reservation(start_date, end_date)
-      # binding.pry
       available_rooms_list = available_rooms(start_date,end_date)
       new_date_range = Booking::DateRange.new(start_date, end_date)
       new_total_nights = new_date_range.total_nights
       new_cost = new_total_nights * 200
-      
       room = available_rooms_list.sample
-      
-      #p "#############"
-      #p room
-      
       new_reservation = Booking::Reservation.new(new_date_range, new_total_nights, new_cost, room)
       
-      
       reservations.push(new_reservation)
-      # p reservations
     end
     
     def find_reservation(start_date, end_date)
@@ -68,30 +52,22 @@ module Booking
       return reservation_array
     end
     
-    
     def available_rooms(start_date, end_date)
-      # binding.pry
       if start_date > end_date
         raise ArgumentError, "End date of reservation must be after start date."
       else
-        proposed_date_range = Booking::DateRange.new(start_date, end_date)
-        # unavailable_rooms = []
         reservations.each do |reservation|
-          if reservation.date_range.end_date > proposed_date_range.start_date || reservation.date_range.start_date < proposed_date_range.end_date
+          if reservation.date_range.end_date > start_date || reservation.date_range.start_date < end_date
             if !unavailable_rooms.include?(reservation.room.number)
               unavailable_rooms << reservation.room.number
             end
           end
         end
-        # p unavailable_rooms
-        # p "#############"
-        # available_rooms = []
         
         a_rooms = rooms 
         i = 0
         a_rooms.each do |room|
           if unavailable_rooms.include?(room.number)
-            #if room.number == unavailable_rooms[i]
             a_rooms.delete(room)
           else
             i += 1
@@ -101,7 +77,6 @@ module Booking
         if a_rooms == []
           raise StandardError, "There are no rooms available for that date range."
         else
-          # p available_rooms
           return a_rooms
         end
       end

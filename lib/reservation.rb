@@ -13,17 +13,5 @@ module Booking
       @total_nights = total_nights
       @total_cost = total_cost
     end
-    
-    # def assign_room
-    #   #binding.pry
-    #   return Booking::Hotel.rooms.sample
-    # end
-    
-    # def validate_date
-    # end
-    
-    # def self.find(date)
-    # end
-    
   end
 end
