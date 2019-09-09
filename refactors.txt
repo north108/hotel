@@ -1,0 +1,5 @@
+1. I wanted to have hotel_block be a child of reservation but I am not sure if it would work with the room instace variable that was 
+written into reservation.
+
+2. The naming could definitely be clearer throughout the whole project. 
+3. There are a few methods inside of hotel that have quite a few nested if statements and I would clean those up to be clearer.
