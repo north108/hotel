@@ -34,3 +34,5 @@ I would modify implementation B and add some logic into the CartEntry that if qu
 
 Which implementation better adheres to the single responsibility principle?
 B
+
+I realize now that there are many places where my Hotel class takes on multiple roles but one place that I noticed is that it calculates the price of the stay when in reality that should be occuring in the Reservation class. I need to move that to its own method within Reservation. This will make hotel slightly more single responsibility.  

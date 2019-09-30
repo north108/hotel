@@ -7,8 +7,8 @@ def build_test_reservation
   res_date_range = Booking::DateRange.new(start_date, end_date)
   res_room = Booking::Room.new(5)
   res_total_nights = res_date_range.total_nights
-  res_total_cost = res_total_nights * 200
-  reservation = Booking::Reservation.new(res_date_range, res_total_nights, res_total_cost, res_room)
+  # res_total_cost = res_total_nights * 200
+  reservation = Booking::Reservation.new(res_date_range, res_total_nights, res_room)
 end
 
 describe "Reservation Class" do

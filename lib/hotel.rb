@@ -35,9 +35,9 @@ module Booking
       available_rooms_list = available_rooms(start_date,end_date)
       new_date_range = Booking::DateRange.new(start_date, end_date)
       new_total_nights = new_date_range.total_nights
-      new_cost = new_total_nights * 200
+      # new_cost = new_total_nights * 200
       room = available_rooms_list.sample
-      new_reservation = Booking::Reservation.new(new_date_range, new_total_nights, new_cost, room)
+      new_reservation = Booking::Reservation.new(new_date_range, new_total_nights, room)
       
       reservations.push(new_reservation)
     end
